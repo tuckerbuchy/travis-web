@@ -27,8 +27,8 @@ export default Model.extend(DurationCalculations, DurationAttributes, {
   repo: belongsTo('repo', { async: true }),
   build: belongsTo('build', { async: true }),
   commit: belongsTo('commit', { async: true }),
-  branch: Ember.computed.alias('build.branch'),
-  branchName: Ember.computed.alias('build.branchName'),
+  branch: belongsTo('branch'),
+  branchName: Ember.computed.alias('branch.name'),
 
   stage: belongsTo('stage', { async: false }),
 
