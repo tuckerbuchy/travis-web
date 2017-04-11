@@ -6,7 +6,6 @@ const { alias } = Ember.computed;
 
 export default Ember.Component.extend({
   auth: service(),
-  popup: service(),
   permissions: service(),
 
   tagName: 'nav',
@@ -34,5 +33,11 @@ export default Ember.Component.extend({
 
   displayStatusImages: Ember.computed('permissions.all', 'repo', function () {
     return this.get('permissions').hasPermission(this.get('repo'));
-  })
+  }),
+
+  actions: {
+    triggerBuildModal() {
+      this.get('onTriggerBuild')();
+    }
+  }
 });

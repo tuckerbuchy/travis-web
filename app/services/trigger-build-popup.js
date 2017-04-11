@@ -1,24 +1,11 @@
 import Ember from 'ember';
-import computed from 'ember-computed-decorators';
 import config from 'travis/config/environment';
 
-const { service } = Ember.inject;
+let { service } = Ember.inject;
 
-export default Ember.Component.extend({
-  statusImages: service(),
-  externalLinks: service(),
+export default Ember.Service.extend({
+  auth: service(),
   isShowingTriggerBuildModal: false,
-  isShowingStatusBadgeModal: false,
-
-  @computed('repo.slug', 'repo.defaultBranch.name')
-  statusImageUrl(slug, branchName) {
-    return this.get('statusImages').imageUrl(slug, branchName);
-  },
-
-  @computed('repo.slug')
-  urlGithub(slug) {
-    return this.get('externalLinks').githubRepo(slug);
-  },
 
   // @TODO fix this copy pasta :/
   branches: Ember.computed('popupName', 'repo', function () {
@@ -49,12 +36,7 @@ export default Ember.Component.extend({
     return array;
   }),
 
-  actions: {
-    toggleStatusBadgeModal() {
-      this.toggleProperty('isShowingStatusBadgeModal');
-    },
-    toggleTriggerBuildModal() {
-      this.toggleProperty('isShowingTriggerBuildModal');
-    }
+  toggleTriggerBuildModal() {
+    this.toggleProperty('isShowingTriggerBuildModal');
   }
 });

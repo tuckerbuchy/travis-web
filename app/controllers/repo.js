@@ -8,7 +8,6 @@ const { alias } = Ember.computed;
 export default Ember.Controller.extend({
   updateTimesService: service('updateTimes'),
   repositories: service(),
-  popup: service(),
   tabStates: service(),
 
   jobController: controller('job'),
@@ -79,5 +78,5 @@ export default Ember.Controller.extend({
   observeLastBuild() {
     this.currentBuildDidChange();
     return this.addObserver('repo.currentBuild', this, 'currentBuildDidChange');
-  },
+  }
 });
