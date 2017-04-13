@@ -7,7 +7,7 @@ moduleForAcceptance('Acceptance | profile/update-repositories', {
     const currentUser = server.create('user', {
       name: 'Sara Ahmed',
       login: 'feministkilljoy',
-      repos_count: 3
+      repos_count: 3,
     });
 
     signInUser(currentUser);
@@ -16,41 +16,56 @@ moduleForAcceptance('Acceptance | profile/update-repositories', {
     server.create('account', {
       name: 'Feminist Killjoys',
       type: 'organization',
-      owner: {
-        login: 'killjoys',
-      },
-      repos_count: 30
+      login: 'killjoys',
+      repos_count: 30,
     });
 
     // create active repository
     server.create('repository', {
       name: 'living-a-feminist-life',
-      owner_name: 'feministkilljoy',
+      owner: {
+        login: 'feministkilljoy',
+      },
       active: true,
-      admin: true
+      permissions: {
+        admin: true,
+      },
     });
 
     // create inactive repository
     server.create('repository', {
       name: 'willful-subjects',
-      owner_name: 'feministkilljoy',
+      owner: {
+        login: 'feministkilljoy',
+      },
       active: false,
-      admin: true
+      permissions: {
+        admin: true,
+      },
     });
 
     // create repository without admin permissions
     server.create('repository', {
       name: 'affect-theory-reader',
-      owner_name: 'feministkilljoy',
+      owner: {
+        login: 'feministkilljoy',
+      },
       active: true,
-      admin: false
+      permissions: {
+        admin: false,
+      },
     });
 
     // create other random repository to ensure correct filtering
     server.create('repository', {
       name: 'feminism-is-for-everybody',
-      owner_name: 'bellhooks',
-      active: false
+      owner: {
+        login: 'bellhooks',
+      },
+      active: false,
+      permissions: {
+        admin: false,
+      },
     });
   }
 });

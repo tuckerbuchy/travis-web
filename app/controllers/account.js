@@ -28,10 +28,11 @@ export default Ember.Controller.extend({
   reloadOwnerRepositories() {
     const login = this.get('model.login');
     if (login) {
+      this.set('ownedRepositories', []);
       this.set('loadingError', false);
       const repositories = Repository.fetchByOwner(this.store, login);
       return repositories.then(() => {
-        const ownedRepositories = this.store.peekAll('repo', repo => repo.owner.login === login);
+        const ownedRepositories = this.store.peekAll('repo').filterBy('owner.login', login);
         this.set('ownedRepositories', ownedRepositories);
         this.set('ownedRepositories.isLoaded', true);
       }).catch(() => {

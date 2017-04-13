@@ -4,8 +4,9 @@
     {{#if repository.isSaving}}
       {{loading-indicator inline=true}}
     {{else}}
-        {{#link-to "settings" repository.owner.login repository.name class="profile-settings" title="Go to Travis CI repository settings"}}
-          {{inline-svg 'icon-settings' class="icon icon-hover"}}{{/link-to}}
+      {{#link-to "settings" repository.owner.login repository.name class="profile-settings" title="Go to Travis CI repository settings"}}
+        {{inline-svg 'icon-settings' class="icon icon-hover"}}
+      {{/link-to}}
     {{/if}}
   {{else}}
     {{repository-switch repository=repository disabled=true}}
