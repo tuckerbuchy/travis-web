@@ -265,7 +265,7 @@ Repo.reopenClass({
     const promise = adapter.byOwner(owner).then((payload) => {
       const serializer = store.serializerFor('repo');
       const modelClass = store.modelFor('repo');
-      const serialized = serializer.normalizeResponse(store, modelClass, payload, null, 'query');
+      const serialized = serializer.normalizeResponse(store, modelClass, payload, null, 'findAll');
       store.push({
         data: serialized.data,
       });
