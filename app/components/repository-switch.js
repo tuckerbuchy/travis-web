@@ -6,6 +6,8 @@ export default Ember.Component.extend({
   classNameBindings: ['repository.active:active', 'disabled:disabled', 'disabled:inline-block'],
 
   click() {
-    this.get('toggleRepositoryTask').perform();
+    if (!this.get('disabled')) {
+      this.get('toggleRepositoryTask').perform();
+    }
   },
 });
