@@ -16,10 +16,6 @@ export default function () {
     return { accounts: users.concat(accounts) };
   });
 
-  this.get('/hooks', function ({ hooks }, { queryParams: { owner_name } }) {
-    return this.serialize(hooks.where({ owner_name }), 'hook');
-  });
-
   this.put('/hooks/:id', (schema, request) => {
     const user = schema.hooks.find(request.params.id);
     server.create('repository', { id: request.params.id });
@@ -82,6 +78,28 @@ export default function () {
   this.get('/repo/:repositoryId/crons', function (schema, request) {
     const { repositoryId } = request.params;
     return this.serialize(schema.crons.where({ repositoryId }), 'cron');
+  });
+
+  this.post('/repo/:repositoryId/activate', function (schema, request) {
+    const { repositoryId } = request.params;
+    const repository = schema.repositories.find(repositoryId);
+
+    if (repository) {
+      repository.update('active', true);
+    }
+
+    return this.serialize(repository);
+  });
+
+  this.post('/repo/:repositoryId/deactivate', function (schema, request) {
+    const { repositoryId } = request.params;
+    const repository = schema.repositories.find(repositoryId);
+
+    if (repository) {
+      repository.update('active', false);
+    }
+
+    return this.serialize(repository);
   });
 
   this.get('/cron/:id');
