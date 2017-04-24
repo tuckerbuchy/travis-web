@@ -47,22 +47,22 @@ export default Ember.Controller.extend({
   },
 
   @computed('ownedRepositories.[]')
-  hooks(hooks) {
-    if (!hooks) {
+  administerableRepositories(repositories) {
+    if (!repositories) {
       this.reloadOwnerRepositories();
     }
-    return hooks.filter(function (hook) {
-      return hook.get('permissions.admin');
+    return repositories.filter(function (repository) {
+      return repository.get('permissions.admin');
     }).sortBy('name');
   },
 
   @computed('ownedRepositories.[]')
-  hooksWithoutAdmin(hooks) {
-    if (!hooks) {
+  unadministerableRepositories(repositories) {
+    if (!repositories) {
       this.reloadOwnerRepositories();
     }
-    return this.get('ownedRepositories').filter(function (hook) {
-      return !hook.get('permissions.admin');
+    return repositories.filter(function (repository) {
+      return !repository.get('permissions.admin');
     }).sortBy('name');
   },
 

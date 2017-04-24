@@ -53,11 +53,11 @@
 
   <div id="administerable-hooks">
     <ul class="profile-hooklist">
-      {{#each hooks as |repository|}}
+      {{#each repositories as |repository|}}
         {{repository-status-toggle repository=repository admin=true}}
       {{else}}
       <li>
-        {{#if hooksWithoutAdmin.length}}
+        {{#if unadministerableRepositories.length}}
           Sorry, but we can't find any repositories you have admin access to.
         {{else}}
           Sorry, it seems like we couldn't find any repositories you have access to on GitHub.
@@ -67,11 +67,11 @@
     </ul>
   </div>
 
-  {{#if hooksWithoutAdmin.length}}
+  {{#if unadministerableRepositories.length}}
     <div id="unadministerable-hooks">
       <p class="text-medium">You require admin rights to enable these repositories</p>
       <ul class="profile-hooklist">
-        {{#each hooksWithoutAdmin as |repository| }}
+        {{#each unadministerableRepositories as |repository| }}
           {{repository-status-toggle repository=repository}}
         {{/each}}
       </ul>
