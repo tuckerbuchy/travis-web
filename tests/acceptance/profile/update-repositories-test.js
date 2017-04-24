@@ -73,9 +73,9 @@ moduleForAcceptance('Acceptance | profile/update-repositories', {
 test('updating repository', function (assert) {
   profilePage.visit({ username: 'feministkilljoy' });
 
-  profilePage.administerableHooks(0).toggle();
-  profilePage.administerableHooks(1).toggle();
-  profilePage.unadministerableHooks(0).toggle();
+  profilePage.administerableRepositories(0).toggle();
+  profilePage.administerableRepositories(1).toggle();
+  profilePage.unadministerableRepositories(0).toggle();
 
   andThen(() => {
     assert.notOk(server.db.hooks[0].active, 'expected formerly active hook to be inactive');

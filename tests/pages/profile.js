@@ -25,8 +25,8 @@ export default PageObject.create({
   visit: visitable('profile/:username'),
   name: text('.profile-header h1'),
 
-  administerableHooks: hooksCollection('#administerable-hooks'),
-  unadministerableHooks: hooksCollection('#unadministerable-hooks'),
+  administerableRepositories: hooksCollection('#administerable-hooks'),
+  unadministerableRepositories: hooksCollection('#unadministerable-hooks'),
 
   token: {
     scope: '.profile-user-last',

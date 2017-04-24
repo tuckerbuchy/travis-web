@@ -85,14 +85,14 @@ test('view profile', function (assert) {
     assert.equal(profilePage.accounts(1).name, 'Feminist Killjoys');
     assert.equal(profilePage.accounts(1).repositoryCount, 30);
 
-    assert.equal(profilePage.administerableHooks().count, 2, 'expected two administerable hooks');
+    assert.equal(profilePage.administerableRepositories().count, 2, 'expected two administerable hooks');
 
-    assert.equal(profilePage.administerableHooks(0).name, 'feministkilljoy/living-a-feminist-life');
-    assert.ok(profilePage.administerableHooks(0).isActive, 'expected active hook to appear active');
+    assert.equal(profilePage.administerableRepositories(0).name, 'feministkilljoy/living-a-feminist-life');
+    assert.ok(profilePage.administerableRepositories(0).isActive, 'expected active hook to appear active');
 
-    assert.equal(profilePage.administerableHooks(1).name, 'feministkilljoy/willful-subjects');
-    assert.notOk(profilePage.administerableHooks(1).isActive, 'expected inactive hook to appear inactive');
+    assert.equal(profilePage.administerableRepositories(1).name, 'feministkilljoy/willful-subjects');
+    assert.notOk(profilePage.administerableRepositories(1).isActive, 'expected inactive hook to appear inactive');
 
-    assert.equal(profilePage.unadministerableHooks().count, 1, 'expected one unadministerable hook');
+    assert.equal(profilePage.unadministerableRepositories().count, 1, 'expected one unadministerable hook');
   });
 });
