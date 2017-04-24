@@ -116,9 +116,7 @@ export default Model.extend({
     }
   },
 
-  type: Ember.computed(function () {
-    return 'user';
-  }),
+  type: 'user',
 
   sync() {
     var self;
