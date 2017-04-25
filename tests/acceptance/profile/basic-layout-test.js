@@ -86,11 +86,11 @@ test('view profile', function (assert) {
     assert.equal(profilePage.administerableRepositories().count, 2, 'expected two administerable repositories');
 
     assert.equal(profilePage.administerableRepositories(0).name, 'feministkilljoy/living-a-feminist-life');
-    assert.ok(profilePage.administerableRepositories(0).isActive, 'expected active hook to appear active');
+    assert.ok(profilePage.administerableRepositories(0).isActive, 'expected active repository to appear active');
 
     assert.equal(profilePage.administerableRepositories(1).name, 'feministkilljoy/willful-subjects');
-    assert.notOk(profilePage.administerableRepositories(1).isActive, 'expected inactive hook to appear inactive');
+    assert.notOk(profilePage.administerableRepositories(1).isActive, 'expected inactive repository to appear inactive');
 
-    assert.equal(profilePage.unadministerableRepositories().count, 1, 'expected one unadministerable hook');
+    assert.equal(profilePage.unadministerableRepositories().count, 1, 'expected one unadministerable repository');
   });
 });

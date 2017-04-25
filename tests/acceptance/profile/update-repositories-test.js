@@ -78,8 +78,8 @@ test('updating repository', function (assert) {
   profilePage.unadministerableRepositories(0).toggle();
 
   andThen(() => {
-    assert.notOk(server.db.repositories[0].active, 'expected formerly active hook to be inactive');
-    assert.ok(server.db.repositories[1].active, 'expected formerly inactive hook to be active');
-    assert.ok(server.db.repositories[2].active, 'expected unadministerable hook to be unchanged');
+    assert.notOk(server.db.repositories[0].active, 'expected formerly active repository to be inactive');
+    assert.ok(server.db.repositories[1].active, 'expected formerly inactive repository to be active');
+    assert.ok(server.db.repositories[2].active, 'expected unadministerable repository to be unchanged');
   });
 });
