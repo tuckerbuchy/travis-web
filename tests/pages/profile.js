@@ -25,7 +25,7 @@ export default PageObject.create({
   visit: visitable('profile/:username'),
   name: text('.profile-header h1'),
 
-  administerableRepositories: existingRepositoriesCollection('#administerable-hooks'),
+  administerableRepositories: existingRepositoriesCollection('#administerable-repositories'),
   unadministerableRepositories: existingRepositoriesCollection('#unadministerable-repositories'),
 
   token: {
