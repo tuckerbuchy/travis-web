@@ -26,7 +26,7 @@ export default PageObject.create({
   name: text('.profile-header h1'),
 
   administerableRepositories: existingRepositoriesCollection('#administerable-hooks'),
-  unadministerableRepositories: existingRepositoriesCollection('#unadministerable-hooks'),
+  unadministerableRepositories: existingRepositoriesCollection('#unadministerable-repositories'),
 
   token: {
     scope: '.profile-user-last',
