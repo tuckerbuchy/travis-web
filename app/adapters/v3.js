@@ -7,6 +7,8 @@ const { service } = Ember.inject;
 export default RESTAdapter.extend({
   auth: service(),
   host: config.apiEndpoint,
+  // TODO: enable when API V3 can get multiple records by ids
+  // coalesceFindRequests: true,
 
   sortQueryParams: false,
   coalesceFindRequests: false,
@@ -15,6 +17,15 @@ export default RESTAdapter.extend({
     'Accept': 'application/json',
     'Content-Type': 'application/json'
   },
+
+  // TODO: implement
+  //findMany(store, type, ids) {
+  //  return this.ajax(this.buildURL(type.modelName), 'GET', {
+  //    data: {
+  //      ids: ids
+  //    }
+  //  });
+  //},
 
   ajaxOptions: function (url, type, options) {
     options = options || {};

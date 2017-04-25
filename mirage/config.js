@@ -196,9 +196,9 @@ export default function () {
     };
   });
 
-  this.get('/jobs/:id', function (schema, request) {
+  this.get('/job/:id', function (schema, request) {
     let job = schema.jobs.find(request.params.id);
-    return this.serialize(job, 'v2-job');
+    return this.serialize(job, 'job');
   });
 
   this.get('/jobs');

@@ -17,8 +17,6 @@ export default Model.extend(DurationCalculations, {
   queue: attr(),
   state: attr(),
   number: attr(),
-  _startedAt: attr(),
-  _finishedAt: attr(),
   allowFailure: attr('boolean'),
   tags: attr(),
   repositoryPrivate: attr(),
@@ -42,18 +40,6 @@ export default Model.extend(DurationCalculations, {
       ajax: this.get('ajax'),
       container: Ember.getOwner(this)
     });
-  }),
-
-  startedAt: Ember.computed('_startedAt', 'notStarted', function () {
-    if (!this.get('notStarted')) {
-      return this.get('_startedAt');
-    }
-  }),
-
-  finishedAt: Ember.computed('_finishedAt', 'notStarted', function () {
-    if (!this.get('notStarted')) {
-      return this.get('_finishedAt');
-    }
   }),
 
   repoSlug: Ember.computed('repositorySlug', function () {
