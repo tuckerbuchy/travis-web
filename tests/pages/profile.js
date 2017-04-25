@@ -11,7 +11,7 @@ let {
 function existingRepositoriesCollection(scope) {
   return collection({
     scope: scope,
-    itemScope: '.profile-hooklist .row',
+    itemScope: '.profile-repositorylist .row',
 
     item: {
       name: text('a.profile-repo'),

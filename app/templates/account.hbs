@@ -52,7 +52,7 @@
   </ol>
 
   <div id="administerable-repositories">
-    <ul class="profile-hooklist">
+    <ul class="profile-repositorylist">
       {{#each administerableRepositories as |repository|}}
         {{repository-status-toggle repository=repository admin=true}}
       {{else}}
@@ -70,7 +70,7 @@
   {{#if unadministerableRepositories.length}}
     <div id="unadministerable-repositories">
       <p class="text-medium">You require admin rights to enable these repositories</p>
-      <ul class="profile-hooklist">
+      <ul class="profile-repositorylist">
         {{#each unadministerableRepositories as |repository| }}
           {{repository-status-toggle repository=repository}}
         {{/each}}
