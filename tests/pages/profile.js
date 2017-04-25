@@ -8,7 +8,7 @@ let {
   visitable
 } = PageObject;
 
-function hooksCollection(scope) {
+function existingRepositoriesCollection(scope) {
   return collection({
     scope: scope,
     itemScope: '.profile-hooklist .row',
@@ -25,8 +25,8 @@ export default PageObject.create({
   visit: visitable('profile/:username'),
   name: text('.profile-header h1'),
 
-  administerableRepositories: hooksCollection('#administerable-hooks'),
-  unadministerableRepositories: hooksCollection('#unadministerable-hooks'),
+  administerableRepositories: existingRepositoriesCollection('#administerable-hooks'),
+  unadministerableRepositories: existingRepositoriesCollection('#unadministerable-hooks'),
 
   token: {
     scope: '.profile-user-last',
