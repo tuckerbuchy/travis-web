@@ -16,9 +16,7 @@ moduleForAcceptance('Acceptance | profile/basic layout', {
     server.create('account', {
       name: 'Feminist Killjoys',
       type: 'organization',
-      owner: {
-        login: 'killjoys',
-      },
+      login: 'killjoys',
       repos_count: 30
     });
 
