@@ -53,7 +53,7 @@
 
   <div id="administerable-hooks">
     <ul class="profile-hooklist">
-      {{#each repositories as |repository|}}
+      {{#each administerableRepositories as |repository|}}
         {{repository-status-toggle repository=repository admin=true}}
       {{else}}
       <li>
