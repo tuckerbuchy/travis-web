@@ -44,8 +44,8 @@ moduleForAcceptance('Acceptance | profile/basic layout', {
       },
     });
 
-    // create hook without admin permissions
-    server.create('hook', {
+    // create repository without admin permissions
+    server.create('repository', {
       name: 'affect-theory-reader',
       owner: {
         login: 'feministkilljoy',
@@ -83,7 +83,7 @@ test('view profile', function (assert) {
     assert.equal(profilePage.accounts(1).name, 'Feminist Killjoys');
     assert.equal(profilePage.accounts(1).repositoryCount, 30);
 
-    assert.equal(profilePage.administerableRepositories().count, 2, 'expected two administerable hooks');
+    assert.equal(profilePage.administerableRepositories().count, 2, 'expected two administerable repositories');
 
     assert.equal(profilePage.administerableRepositories(0).name, 'feministkilljoy/living-a-feminist-life');
     assert.ok(profilePage.administerableRepositories(0).isActive, 'expected active hook to appear active');
