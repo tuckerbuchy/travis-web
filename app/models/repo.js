@@ -231,33 +231,38 @@ Repo.reopenClass({
   },
 
   fetchBySlug(store, slug) {
-    var adapter, modelClass, promise;
-    promise = null;
-    adapter = store.adapterFor('repo');
-    modelClass = store.modelFor('repo');
-    promise = adapter.findRecord(store, modelClass, slug).then(function (payload) {
-      var i, len, record, ref, repo, result, serializer;
-      serializer = store.serializerFor('repo');
+    var adapter, modelClass, promise, repos;
+    repos = store.peekAll('repo').filterBy('slug', slug);
+    if (repos.get('length') > 0) {
+      return repos.get('firstObject');
+    } else {
+      promise = null;
+      adapter = store.adapterFor('repo');
       modelClass = store.modelFor('repo');
-      result = serializer.normalizeResponse(store, modelClass, payload, null, 'findRecord');
-      repo = store.push({
-        data: result.data
-      });
-      ref = result.included;
-      for (i = 0, len = ref.length; i < len; i++) {
-        record = ref[i];
-        store.push({
-          data: record
+      promise = adapter.findRecord(store, modelClass, slug).then(function (payload) {
+        var i, len, record, ref, repo, result, serializer;
+        serializer = store.serializerFor('repo');
+        modelClass = store.modelFor('repo');
+        result = serializer.normalizeResponse(store, modelClass, payload, null, 'findRecord');
+        repo = store.push({
+          data: result.data
         });
-      }
-      return repo;
-    });
-    return promise['catch'](function () {
-      var error;
-      error = new Error('repo not found');
-      error.slug = slug;
-      throw error;
-    });
+        ref = result.included;
+        for (i = 0, len = ref.length; i < len; i++) {
+          record = ref[i];
+          store.push({
+            data: record
+          });
+        }
+        return repo;
+      });
+      return promise['catch'](function () {
+        var error;
+        error = new Error('repo not found');
+        error.slug = slug;
+        throw error;
+      });
+    }
   },
 
   fetchByOwner(store, owner) {
