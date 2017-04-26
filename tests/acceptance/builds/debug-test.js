@@ -12,7 +12,7 @@ moduleForAcceptance('Acceptance | builds/debug', {
 test('debugging single-job build', function (assert) {
   withFeature('pro-version');
 
-  let repository =  server.create('repository', { slug: 'travis-ci/travis-web' });
+  let repository =  server.create('repository');
   server.create('branch', {});
 
   let commit = server.create('commit', { author_email: 'mrt@travis-ci.org', author_name: 'Mr T', committer_email: 'mrt@travis-ci.org', committer_name: 'Mr T', branch: 'acceptance-tests', message: 'This is a message', branch_is_default: true });
@@ -40,7 +40,7 @@ test('debugging single-job build', function (assert) {
 test('multi-job builds cannot be debugged', function (assert) {
   withFeature('pro-version');
 
-  let repository =  server.create('repository', { slug: 'travis-ci/travis-web' });
+  let repository =  server.create('repository');
   server.create('branch', {});
 
   let commit = server.create('commit', { author_email: 'mrt@travis-ci.org', author_name: 'Mr T', committer_email: 'mrt@travis-ci.org', committer_name: 'Mr T', branch: 'acceptance-tests', message: 'This is a message', branch_is_default: true });
