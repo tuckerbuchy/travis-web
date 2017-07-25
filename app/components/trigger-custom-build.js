@@ -23,12 +23,13 @@ export default Ember.Component.extend({
   },
 
   sendTriggerRequest: task(function* () {
+    this.set('triggering', true);
+    let config = YAML.parse(this.get('triggerBuildConfig'));
+
     let runInterval = 0;
     if (!Ember.testing) {
       runInterval = 2000;
     }
-    this.set('triggering', true);
-    let config = YAML.parse(this.get('triggerBuildConfig'));
 
     let body = {
       request: {
@@ -52,19 +53,20 @@ export default Ember.Component.extend({
                     { headers: { 'Travis-API-Version': '3' } })
               .then((data) => {
                 let reqResult = data.result;
-                let triggeredBuild = data.builds[0];
+                let triggeredBuild = data.builds ? data.builds[0] : null;
+
                 this.set('triggering', false);
 
-                if (reqResult === 'approved') {
+                if (reqResult === 'approved' && triggeredBuild) {
                   this.get('onClose')();
-                  this.get('router').transitionTo('build', triggeredBuild.id);
+                  this.get('router').transitionTo('build', this.get('repo'), triggeredBuild.id);
                 } else if (reqResult === 'rejected') {
-                  this.get('flashes').error('Oops, your build request was rejected.');
-                  this.get('router').transitionTo('requests');
+                  this.get('flashes').error('Your build request was rejected.');
+                  this.get('router').transitionTo('requests', this.get('repo'));
                   this.get('onClose')();
                 } else { // pending etc
-                  this.get('flashes').notice('Oops, your build request was not ready yet.');
-                  this.get('router').transitionTo('requests');
+                  this.get('flashes').notice('Your build was not ready yet.');
+                  this.get('router').transitionTo('requests', this.get('repo'));
                   this.get('onClose')();
                 }
               });

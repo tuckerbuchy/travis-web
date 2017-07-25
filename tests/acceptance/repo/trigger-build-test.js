@@ -2,7 +2,21 @@ import { test } from 'qunit';
 import moduleForAcceptance from 'travis/tests/helpers/module-for-acceptance';
 import triggerBuildPage from 'travis/tests/pages/trigger-build';
 
-moduleForAcceptance('Acceptance | repo/trigger build');
+moduleForAcceptance('Acceptance | repo/trigger build', {
+  beforeEach() {
+
+  }
+});
+
+test('trigger link is not visible to not logged in users', function (assert) {
+  const repo = server.create('repository', {
+    name: 'difference-engine',
+    slug: 'adal/difference-engine'
+  });
+
+  triggerBuildPage.visit({ slug: repo.slug });
+  assert.ok(triggerBuildPage.popupTriggerLinkIsHidden, 'cannot see trigger build link');
+});
 
 test('triggering a custom build via the dropdown', function (assert) {
   this.currentUser = server.create('user', {
@@ -13,7 +27,10 @@ test('triggering a custom build via the dropdown', function (assert) {
 
   const repo = server.create('repository', {
     name: 'difference-engine',
-    slug: 'adal/difference-engine'
+    slug: 'adal/difference-engine',
+    permissions: {
+      create_request: true
+    }
   });
 
   const repoId = parseInt(repo.id);
@@ -54,7 +71,7 @@ test('triggering a custom build via the dropdown', function (assert) {
 
   triggerBuildPage.selectBranch('master');
   triggerBuildPage.writeMessage('This is a demo build');
-  triggerBuildPage.writeConfig('script: echo Hello');
+  triggerBuildPage.writeConfig('script: echo "Hello World"');
   percySnapshot(assert);
   triggerBuildPage.clickSubmit();
 

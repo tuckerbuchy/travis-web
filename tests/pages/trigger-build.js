@@ -12,6 +12,7 @@ let {
 export default PageObject.create({
   visit: visitable(':slug/builds'),
   popupIsHidden: isHidden('.trigger-build-modal'),
+  popupTriggerLinkIsHidden: isHidden('.option-dropdown .trigger-build-anchor'),
   openPopup: clickable('.option-dropdown .trigger-build-anchor'),
   popupIsVisible: isVisible('.trigger-build-modal'),
   selectBranch: selectable('#trigger-build-branches'),
