@@ -23,7 +23,7 @@ export default Model.extend({
     // For some reason some of the requests have a null result beside the fact that
     // the build was created. We need to look into it, but for now we can just assume
     // that if build was created, the request was accepted
-    return this.get('result') === 'accepted' || this.get('build.id');
+    return this.get('result') === 'approved' || this.get('build.id');
   }),
 
   isPullRequest: Ember.computed('event_type', function () {
