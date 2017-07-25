@@ -33,6 +33,8 @@ export default Model.extend(DurationCalculations, DurationAttributes, {
   stage: belongsTo('stage', { async: false }),
 
   isPullRequest: Ember.computed.alias('build.isPullRequest'),
+  isTag: Ember.computed.alias('build.isTag'),
+  tag: Ember.computed.alias('build.tag'),
   pullRequestNumber: Ember.computed.alias('build.pullRequestNumber'),
   pullRequestTitle: Ember.computed.alias('build.pullRequestTitle'),
 

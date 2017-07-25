@@ -39,10 +39,17 @@
         </li>
       {{/if}}
       <li>
-        <a class="commit-branch-url" href="{{urlGitHubBranch}}" title="Look at the branch on GitHub">
-          {{svg-jar 'icon-github' class="icon"}}
-          <span class="label-align inner-underline">Branch {{build.branchName}}</span>
-        </a>
+        {{#if item.isTag}}
+          <a class="commit-branch-url" href="{{urlGitHubTag}}" title="Look at the tag on GitHub">
+            {{svg-jar 'icon-github' class="icon"}}
+            <span class="label-align inner-underline">Tag {{item.tag}}</span>
+</a>
+        {{else}}
+          <a class="commit-branch-url" href="{{urlGitHubBranch}}" title="Look at the branch on GitHub">
+            {{svg-jar 'icon-github' class="icon"}}
+            <span class="label-align inner-underline">Branch {{build.branchName}}</span>
+          </a>
+        {{/if}}
       </li>
     </ul>
 
