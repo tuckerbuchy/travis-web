@@ -11,7 +11,7 @@ export default Ember.Component.extend({
   }),
 
   hasPassed: Ember.computed('status', function () {
-    return this.get('status') === 'passed' || this.get('status') === 'accepted';
+    return this.get('status') === 'passed' || this.get('status') === 'approved';
   }),
 
   hasFailed: Ember.computed('status', function () {
@@ -28,7 +28,7 @@ export default Ember.Component.extend({
 
   isRunning: Ember.computed('status', function () {
     let status = this.get('status');
-    let runningStates = ['started', 'queued', 'booting', 'received', 'created'];
+    let runningStates = ['started', 'queued', 'booting', 'received', 'created', 'pending'];
     return runningStates.includes(status);
   }),
 

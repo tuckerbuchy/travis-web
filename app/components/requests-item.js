@@ -14,12 +14,8 @@ export default Ember.Component.extend({
     }
   }),
 
-  requestClass: Ember.computed('content.isAccepted', function () {
-    if (this.get('request.isAccepted')) {
-      return 'accepted';
-    } else {
-      return 'rejected';
-    }
+  requestClass: Ember.computed('request.result', function () {
+    return this.get('request.result');
   }),
 
   type: Ember.computed('request.isPullRequest', function () {
@@ -30,12 +26,8 @@ export default Ember.Component.extend({
     }
   }),
 
-  status: Ember.computed('request.isAccepted', function () {
-    if (this.get('request.isAccepted')) {
-      return 'Accepted';
-    } else {
-      return 'Rejected';
-    }
+  status: Ember.computed('request.result', function () {
+    return this.get('request.result').capitalize();
   }),
 
   message: Ember.computed('features.proVersion', 'request.message', function () {
