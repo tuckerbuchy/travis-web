@@ -47,7 +47,7 @@ export default Ember.Component.extend({
         .then((data) => {
           let reqId = data.request.id;
 
-          Ember.run.later(this, function () {
+          return Ember.run.later(this, function () {
             this.get('ajax')
               .ajax(`/repo/${this.get('repo.id')}/request/${reqId}`, 'GET',
                     { headers: { 'Travis-API-Version': '3' } })
