@@ -21,6 +21,7 @@ test('it renders', function (assert) {
     build: {
       number: 10
     },
+    result: 'approved',
     created_at: yesterday,
     isAccepted: true
   };
