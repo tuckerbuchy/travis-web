@@ -33,7 +33,8 @@ export default Model.extend(DurationCalculations, {
   commit: belongsTo('commit', { async: false }),
 
   jobs: hasMany('job', { async: true }),
-  stages: hasMany('stage', { async: false }),
+  stages: hasMany('stage', { async: true }),
+  _config: attr(),
 
   @computed('_config', 'currentState.stateName')
   config(config, stateName) {
