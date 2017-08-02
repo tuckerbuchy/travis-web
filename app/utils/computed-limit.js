@@ -5,7 +5,7 @@ var limit = function (dependentKey, limitKey) {
     var limit = Ember.get(this, limitKey),
       array = this.get(dependentKey);
 
-    return array.toArray().slice(0, limit);
+    return array ? array.toArray().slice(0, limit) : [];
   });
 };
 

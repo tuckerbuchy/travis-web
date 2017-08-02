@@ -3,12 +3,14 @@ import Model from 'ember-data/model';
 import Ember from 'ember';
 import attr from 'ember-data/attr';
 import { belongsTo } from 'ember-data/relationships';
+import computed from 'ember-computed-decorators';
 
 const { service } = Ember.inject;
 
 const Repo = Model.extend({
-  permissions: attr(),
   ajax: service(),
+  auth: service(),
+  permissions: attr(),
   slug: attr(),
   description: attr(),
   'private': attr('boolean'),
@@ -26,6 +28,15 @@ const Repo = Model.extend({
   }),
   currentBuildFinishedAt: Ember.computed.oneWay('currentBuild.finishedAt'),
   currentBuildId: Ember.computed.oneWay('currentBuild.id'),
+
+  // TODO: this is a hack, we should remove it once @is_collaborator property is
+  // added to a response with the repo
+  @computed('auth.currentUser.permissions.[]')
+  isCurrentUserACollaborator(permissions) {
+    let id = parseInt(this.get('id'));
+
+    return permissions.includes(id);
+  },
 
   sshKey: function () {
     this.store.find('ssh_key', this.get('id'));

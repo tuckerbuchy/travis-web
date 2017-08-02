@@ -3,6 +3,7 @@ import DS from 'ember-data';
 import Ember from 'ember';
 import PaginatedCollectionPromise from 'travis/utils/paginated-collection-promise';
 import FilteredArrayManager from 'travis/utils/filtered-array-manager';
+import LivePaginatedCollectionsManager from 'travis/utils/live-paginated-collections-manager';
 
 const { service } = Ember.inject;
 
@@ -14,6 +15,7 @@ export default DS.Store.extend({
   init() {
     this._super(...arguments);
     this.filteredArraysManager = FilteredArrayManager.create({ store: this });
+    this.livePaginatedCollectionsManager = LivePaginatedCollectionsManager.create({ store: this });
     return this.set('pusherEventHandlerGuards', {});
   },
 
@@ -26,10 +28,19 @@ export default DS.Store.extend({
     }
   },
 
-  paginated() {
-    return PaginatedCollectionPromise.create({
-      content: this.query(...arguments)
-    });
+  paginated(modelName, queryParams, options) {
+    if (!queryParams.offset) {
+      // we're on the first page, live updates can be enabled
+      let c =  this.livePaginatedCollectionsManager.fetchCollection(...arguments);
+      c.then( (result) => {
+        debugger
+      });
+      return c;
+    } else {
+      return PaginatedCollectionPromise.create({
+        content: this.query(...arguments)
+      });
+    }
   },
 
   addPusherEventHandlerGuard(name, callback) {
