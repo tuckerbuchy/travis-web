@@ -6,17 +6,17 @@
       {{item.pullRequestTitle}}
     {{else}}
       <small class="commit-branch"
-        title={{build.branchName}}>{{build.branchName}}</small>
+             title={{build.branchName}}>{{build.branchName}}</small>
       {{format-message commit.subject repo=item.repo eventType=build.eventType}}
     {{/if}}
   </h2>
   <div class="commit-info">
 
-  {{#if commit.body }}
-    <p class="commit-description">
-      <span class="monospace">{{format-message commit.body repo=item.repo pre=true}}</span>
-    </p>
-  {{/if}}
+    {{#if commit.body }}
+      <p class="commit-description">
+        <span class="monospace">{{format-message commit.body repo=item.repo pre=true}}</span>
+      </p>
+    {{/if}}
     <ul class="list-icon">
       <li>
         <a class="commit-commit" title="See the commit on GitHub" href={{urlGithubCommit}}>
@@ -30,21 +30,22 @@
               {{svg-jar 'icon-github' class="icon"}}
               <span class="label-align inner-underline">#{{item.pullRequestNumber}}: {{item.pullRequestTitle}}</span></a>
           {{else}}
-            {{#if item.commit.compareUrl}}
-            <a class="commit-compare" title="See the diff on GitHub" href={{item.commit.compareUrl}}>
-              {{svg-jar 'icon-github' class="icon"}}
-              <span class="label-align inner-underline">Compare {{short-compare-shas item.commit.compareUrl}}</span></a>
-            {{/if}}
+              {{#if item.commit.compareUrl}}
+                <a class="commit-compare" title="See the diff on GitHub" href={{item.commit.compareUrl}}>
+                  {{svg-jar 'icon-github' class="icon"}}
+                  <span class="label-align inner-underline">Compare {{short-compare-shas item.commit.compareUrl}}</span></a>
+              {{/if}}
           {{/if}}
         </li>
       {{/if}}
       {{#if commit.branch.name}}
-      <li>
-        <a class="commit-branch-url" href="{{urlGitHubBranch}}" title="Look at the branch on GitHub">
-          {{svg-jar 'icon-github' class="icon"}}
-          <span class="label-align inner-underline">Branch {{commit.branch.name}}</span>
-        </a>
-      </li>
+        <li>
+          <a class="commit-branch-url" href="{{urlGitHubBranch}}" title="Look at the branch on GitHub">
+            {{svg-jar 'icon-github' class="icon"}}
+            <span class="label-align inner-underline">Branch {{commit.branch.name}}</span>
+          </a>
+        </li>
+      {{/if}}
     </ul>
 
     <p class="commit-author">
@@ -118,7 +119,7 @@
   </ul>
 </div>
 
-<div class='build-tools'>
+<div class="build-tools">
   {{#if isJob}}
     {{repo-actions job=item repo=item.repo}}
   {{else}}
